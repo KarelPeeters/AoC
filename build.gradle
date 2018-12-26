@@ -1,0 +1,51 @@
+buildscript {
+    ext {
+        kotlinVersion = "1.3.11"
+        ext.serialization_version = '0.4'
+    }
+
+    repositories {
+        mavenCentral()
+        jcenter()
+        maven { url "https://kotlin.bintray.com/kotlinx" }
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath "org.jetbrains.kotlinx:kotlinx-gradle-serialization-plugin:$serialization_version"
+    }
+}
+
+apply plugin: "kotlin"
+//apply plugin: 'kotlinx-serialization'
+
+sourceSets {
+    main {
+        kotlin.srcDirs = ["src"]
+        java.srcDirs = ["src"]
+        resources.srcDirs = ["src"]
+    }
+
+    test {
+        kotlin.srcDirs = []
+        java.srcDirs = []
+        resources.srcDirs = []
+    }
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
+    maven { url "https://kotlin.bintray.com/kotlinx" }
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1'
+    compile "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
+    compile "org.ojalgo:ojalgo:44.0.0"
+}
+
+compileKotlin.kotlinOptions {
+    jvmTarget = "1.8"
+}
